@@ -1,0 +1,24 @@
+{
+    "user_commands": {
+        // 60-seconds countdown timer
+        "sacagawea_chgk": {
+            "keys": ["super+alt+keypad_divide"],
+            "caption": "Sacagawea: “What? Where? When?”",
+            "call": "sublime.sacagawea_chgk"
+        },
+        // 20-seconds countdown timer
+        "sacagawea_blitz": {
+            "keys": ["super+alt+keypad_multiply"],
+            "caption": "Sacagawea: Blitz/Superblitz/Brain Ring",
+            "call": "sublime.sacagawea_blitz"
+        },
+        // Quit current view
+        // Required FileCommands package
+        // https://packagecontrol.io/packages/FileCommands
+        "force_quit": {
+            "keys": ["super+alt+keypad_period"],
+            "caption": "FileCommands: Force Quit",
+            "call": "sublime.force_quit"
+        }
+    }
+}

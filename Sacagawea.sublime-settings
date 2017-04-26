@@ -1,0 +1,10 @@
+{
+	// Custom sounds paths.
+	// Support sounds in mp3 format.
+	// Please, escape slashes, if you in Windows:
+	// Example for Windows:
+	// "custom_begin_sound_path": "D:\\SashaGoddess\\sound.mp3",
+	"custom_begin_sound_path": "default",
+	"custom_ten_seconds_sound_path": "default",
+	"custom_end_sound_path": "default"
+}
