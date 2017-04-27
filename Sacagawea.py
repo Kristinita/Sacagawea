@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: Keith Hall
 # @Date: 2017-04-24 06:43:14
-# @Last Modified time: 2017-04-27 14:22:22
+# @Last Modified time: 2017-04-27 22:23:21
 """Sacagawea countdown timer.
 
 Sublime Text timer for “What? Where? When?” and “Brain Ring” games. Keith Hall
@@ -33,46 +33,57 @@ import sublime_plugin
 ABSOLUTE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
-# Global variables
-# Default or custom sounds
-SETTINGS = sublime.load_settings(
-    "Sacagawea.sublime-settings")
-BEGIN_PATH = SETTINGS.get(
-    "custom_begin_sound_path")
-TEN_SECONDS_PATH = SETTINGS.get(
-    "custom_ten_seconds_sound_path")
-END_PATH = SETTINGS.get(
-    "custom_end_sound_path")
+def plugin_loaded():
+    """plugin_loaded function.
 
-# https://www.soundjay.com/beep-sounds-1.html
-if BEGIN_PATH == "default":
-    BEGIN_SOUND = [
-        "mpg123",
-        "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep + "beep-01a.mp3"]
-else:
-    BEGIN_SOUND = [
-        "mpg123",
-        "-q", BEGIN_PATH]
+    Sublime Text plugin developers should not use global variables with
+    SublimeAPI methods, because they not call by Sublime Text start.
+    https://www.sublimetext.com/docs/3/api_reference.html#plugin_lifecycle
+    https://forum.sublimetext.com/t/plugin-not-activating/8209?u=sasha_chernykh
+    """
+    global SETTINGS, BEGIN_PATH, TEN_SECONDS_PATH, END_PATH, BEGIN_SOUND, \
+        TEN_SECONDS_SOUND, END_SOUND
+    # Global variables
+    # Default or custom sounds
+    SETTINGS = sublime.load_settings(
+        "Sacagawea.sublime-settings")
+    BEGIN_PATH = SETTINGS.get(
+        "custom_begin_sound_path")
+    TEN_SECONDS_PATH = SETTINGS.get(
+        "custom_ten_seconds_sound_path")
+    END_PATH = SETTINGS.get(
+        "custom_end_sound_path")
 
-# https://www.soundjay.com/beep-sounds-1.html
-if TEN_SECONDS_PATH == "default":
-    TEN_SECONDS_SOUND = [
-        "mpg123",
-        "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep + "beep-09.mp3"]
-else:
-    BEGIN_SOUND = [
-        "mpg123",
-        "-q", TEN_SECONDS_PATH]
+    # https://www.soundjay.com/beep-sounds-1.html
+    if BEGIN_PATH == "default":
+        BEGIN_SOUND = [
+            "mpg123",
+            "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep + "beep-01a.mp3"]
+    else:
+        BEGIN_SOUND = [
+            "mpg123",
+            "-q", BEGIN_PATH]
 
-# https://www.soundjay.com/censor-beep-sound-effect.html
-if END_PATH == "default":
-    END_SOUND = [
-        "mpg123",
-        "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep + "censor-beep-7.mp3"]
-else:
-    END_SOUND = [
-        "mpg123",
-        "-q", END_PATH]
+    # https://www.soundjay.com/beep-sounds-1.html
+    if TEN_SECONDS_PATH == "default":
+        TEN_SECONDS_SOUND = [
+            "mpg123",
+            "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep + "beep-09.mp3"]
+    else:
+        TEN_SECONDS_SOUND = [
+            "mpg123",
+            "-q", TEN_SECONDS_PATH]
+
+    # https://www.soundjay.com/censor-beep-sound-effect.html
+    if END_PATH == "default":
+        END_SOUND = [
+            "mpg123",
+            "-q", ABSOLUTE_PATH + os.sep + "sounds" + os.sep +
+            "censor-beep-7.mp3"]
+    else:
+        END_SOUND = [
+            "mpg123",
+            "-q", END_PATH]
 
 
 class SacagaweaChgkCommand(sublime_plugin.TextCommand):
@@ -183,7 +194,7 @@ class SacagaweaBlitzCommand(sublime_plugin.TextCommand):
     def print_seconds(self, view, seconds):
         """print_seconds function.
 
-        Same descriptioin as for SacagaweaChgkCommand class.
+        Same description as for SacagaweaChgkCommand class.
 
         Arguments:
             view {str} -- view for editing.
