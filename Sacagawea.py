@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # @Author: Keith Hall
 # @Date: 2017-04-24 06:43:14
-# @Last Modified time: 2017-04-26 20:36:22
-import os
-import subprocess
+# @Last Modified time: 2017-04-27 09:19:59
+"""Sacagawea countdown timer.
 
-import sublime
-import sublime_plugin
+Sublime Text timer for “What? Where? When?” and “Brain Ring” games. Keith Hall
+timer based on http://bit.ly/2q7C1UA timer. Full description see in
+http://Kristinita.ru/Sublime-Text/Sacagawea page.
+"""
+# [H2] Regular (03) ASCII Decorator font
 """
 
  #####
@@ -19,13 +21,11 @@ import sublime_plugin
                                           #
                                      #####
 """
-# [H2] Regular (03) ASCII Decorator font
-"""Sacagawea countdown timer.
+import os
+import subprocess
 
-Sublime Text timer for “What? Where? When?” and “Brain Ring” games. Keith Hall
-timer based on http://bit.ly/2q7C1UA timer. Full description see in
-http://Kristinita.ru/Sublime-Text/Sacagawea page.
-"""
+import sublime
+import sublime_plugin
 # Get plugin path
 # http://stackoverflow.com/a/3430395/5951529
 # Relative path doesn't work
@@ -107,7 +107,6 @@ class SacagaweaChgkCommand(sublime_plugin.TextCommand):
             view {str} -- view for editing.
             seconds {int} -- second, in which run actions.
         """
-
         # Break if current view is not valid.
         # For example, if you close current view.
         # http://bit.ly/2q7B1Qr
@@ -182,7 +181,6 @@ class SacagaweaBlitzCommand(sublime_plugin.TextCommand):
             view {str} -- view for editing.
             seconds {int} -- second, in which run actions.
         """
-
         if not view.is_valid():
             return
         text = ''
