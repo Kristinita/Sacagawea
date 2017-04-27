@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 # @Author: Keith Hall
 # @Date: 2017-04-24 06:43:14
-# @Last Modified time: 2017-04-27 09:19:59
+# @Last Modified time: 2017-04-27 14:22:22
 """Sacagawea countdown timer.
 
 Sublime Text timer for “What? Where? When?” and “Brain Ring” games. Keith Hall
 timer based on http://bit.ly/2q7C1UA timer. Full description see in
 http://Kristinita.ru/Sublime-Text/Sacagawea page.
 """
+import os
+import subprocess
+
+import sublime
+import sublime_plugin
 # [H2] Regular (03) ASCII Decorator font
 """
 
@@ -21,11 +26,6 @@ http://Kristinita.ru/Sublime-Text/Sacagawea page.
                                           #
                                      #####
 """
-import os
-import subprocess
-
-import sublime
-import sublime_plugin
 # Get plugin path
 # http://stackoverflow.com/a/3430395/5951529
 # Relative path doesn't work
@@ -138,11 +138,19 @@ class SacagaweaChgkCommand(sublime_plugin.TextCommand):
                 sublime.set_timeout_async(
                     lambda: view.window().run_command('force_quit'), 5000)
 
+        # Use command from ScrollAlternative package:
+        # https://packagecontrol.io/packages/ScrollAlternative
+        # Don't work “or” operator:
+        # http://stackoverflow.com/a/15112149/5951529
+        if seconds in {40, 20}:
+            view.run_command("scroll_lines_enhanced", {"amount": 20})
+        if seconds == 10:
+            view.run_command("scroll_lines_enhanced", {"amount": 10})
         # Append command for print text to new view, not to console:
         # http://stackoverflow.com/a/43582267/5951529
         view.run_command(
             'append', {
-                'characters': text + '\n', 'scroll_to_end': True})
+                'characters': text + '\n'})
         # Remove carriage in new view
         # https://www.sublimetext.com/docs/3/api_reference.html#sublime.Selection
         view.selection.clear()
@@ -201,7 +209,9 @@ class SacagaweaBlitzCommand(sublime_plugin.TextCommand):
                 sublime.set_timeout_async(
                     lambda: view.window().run_command('force_quit'), 5000)
 
+        if seconds == 10:
+            view.run_command("scroll_lines_enhanced", {"amount": 20})
         view.run_command(
             'append', {
-                'characters': text + '\n', 'scroll_to_end': True})
+                'characters': text + '\n'})
         view.selection.clear()
